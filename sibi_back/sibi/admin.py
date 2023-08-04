@@ -10,6 +10,7 @@ from .models.Moneda_models import Moneda
 from .models.Proveedor_models import Proveedor
 from .models.Referencia_models import Referencia
 from .models.Ubicacion_models import Ubicacion
+from .models.Consumibles_models  import Consumibles
 
 
 
@@ -23,3 +24,5 @@ admin.site.register(Marca)
 admin.site.register(Proveedor)
 admin.site.register(Referencia)
 admin.site.register(Ubicacion)
+admin.site.register(Moneda)
+admin.site.register(Consumibles)
