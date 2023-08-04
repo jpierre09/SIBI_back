@@ -38,3 +38,4 @@ class ActivosFijos(models.Model):
     campo = models.CharField(max_length=100)  # Cambia esto por el tipo de campo que necesitas
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
