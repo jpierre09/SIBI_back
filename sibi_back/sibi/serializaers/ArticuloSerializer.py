@@ -5,3 +5,6 @@ class ArticuloSerializer(serializers.ModelSerializer):
     class Meta:
         model = Articulo
         fields = '__all__'
+        
+        
+        
