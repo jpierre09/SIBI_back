@@ -9,8 +9,8 @@ from .Referencia_models import Referencia
 from .Ubicacion_models import Ubicacion
 from .CategoriaProducto_models import CategoriaProducto
 
-from django.core.validators import RegexValidator, MaxValueValidator, MaxLengthValidator, MinValueValidator
-
+# Validacion de errores
+from .validation_utils import positive_integer_with_max_digits, validate_observaciones
 
 
 class Consumibles(models.Model):
@@ -18,17 +18,9 @@ class Consumibles(models.Model):
     cantidad = models.PositiveIntegerField()
     fecha_ingreso = models.DateField()
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    numero_factura = models.BigIntegerField(
-    validators=[
-        MinValueValidator(0), # Asegura que sea un número positivo
-        MaxValueValidator(10**50 - 1) # Asegura que no tenga más de 50 dígitos
-    ])
+    numero_factura = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
     fecha_factura = models.DateField()
-    numero_contrato = models.BigIntegerField(
-    validators=[
-        MinValueValidator(0), # Asegura que sea un número positivo
-        MaxValueValidator(10**50 - 1) # Asegura que no tenga más de 50 dígitos
-    ])
+    numero_contrato = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
     cartera = models.ForeignKey(Cartera, on_delete=models.CASCADE)
     categoria_producto = models.ForeignKey(CategoriaProducto, on_delete=models.CASCADE)
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
@@ -38,9 +30,7 @@ class Consumibles(models.Model):
     valor_unitario = models.DecimalField(max_digits=10, decimal_places=2)
     flete = models.DecimalField(max_digits=10, decimal_places=2)
     iva = models.ForeignKey(IVA, on_delete=models.CASCADE)
-    observaciones = models.TextField(
-        validators=[MaxLengthValidator(500, message='Las observaciones no pueden exceder los 500 caracteres')]
-    )
+    observaciones = models.TextField(validators=validate_observaciones(500))
     fotos = models.ImageField(upload_to='consumibles/', null=True, blank=True)
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE)
     numero_convenio = models.CharField(max_length=50)

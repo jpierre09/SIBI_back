@@ -9,25 +9,20 @@ from .Proveedor_models import Proveedor
 from .Referencia_models import Referencia
 from .Ubicacion_models import Ubicacion
 
+# Validacion de errores
+from .validation_utils import positive_integer_with_max_digits, validate_observaciones
+
 #Para controlar posibles errores del usuario
-from django.core.validators import RegexValidator, MaxValueValidator, MaxLengthValidator, MinValueValidator
+from django.core.validators import  MaxValueValidator, MaxLengthValidator
 
 
 class ActivosFijos(models.Model):
     cantidad = models.PositiveIntegerField()
     fecha_ingreso = models.DateField()
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    numero_factura = models.BigIntegerField(
-    validators=[
-        MinValueValidator(0), # Asegura que sea un número positivo
-        MaxValueValidator(10**50 - 1) # Asegura que no tenga más de 50 dígitos
-    ])
+    numero_factura = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
     fecha_ingreso = models.DateField()
-    numero_contrato = models.BigIntegerField(
-    validators=[
-        MinValueValidator(0), # Asegura que sea un número positivo
-        MaxValueValidator(10**50 - 1) # Asegura que no tenga más de 50 dígitos
-    ])
+    numero_contrato = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
     cartera = models.ForeignKey(Cartera, on_delete=models.CASCADE)
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
@@ -41,14 +36,8 @@ class ActivosFijos(models.Model):
     valor_unitario = models.DecimalField(max_digits=20, decimal_places=10)
     flete = models.DecimalField(max_digits=10, decimal_places=2)
     iva = models.ForeignKey(IVA, on_delete=models.CASCADE)
-    placa_amva = models.BigIntegerField(
-    validators=[
-        MinValueValidator(0), # Asegura que sea un número positivo
-        MaxValueValidator(10**50 - 1) # Asegura que no tenga más de 50 dígitos
-    ])
-    observaciones = models.TextField(
-        validators=[MaxLengthValidator(500, message='Las observaciones no pueden exceder los 500 caracteres')]
-    )
+    placa_amva = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
+    observaciones = models.TextField(validators=validate_observaciones(500))
     foto = models.ImageField(upload_to='activos_fijos/', null=True, blank=True)
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE)
     control = models.ForeignKey(Control, on_delete=models.CASCADE)
