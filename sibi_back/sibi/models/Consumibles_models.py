@@ -9,6 +9,7 @@ from .Referencia_models import Referencia
 from .Ubicacion_models import Ubicacion
 from .CategoriaProducto_models import CategoriaProducto
 
+from django.core.validators import RegexValidator, MaxValueValidator, MaxLengthValidator
 
 
 
@@ -17,9 +18,15 @@ class Consumibles(models.Model):
     cantidad = models.PositiveIntegerField()
     fecha_ingreso = models.DateField()
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    numero_factura = models.CharField(max_length=50)
+    numero_factura = models.CharField(
+        max_length=50,
+        validators=[RegexValidator(regex='^\d+$', message='El número de factura debe ser un número entero', code='invalid_number')]
+    )
     fecha_factura = models.DateField()
-    numero_contrato = models.CharField(max_length=50)
+    numero_contrato = models.CharField(
+        max_length=50,
+        validators=[RegexValidator(regex='^\d+$', message='El número de contrato debe ser un número entero', code='invalid_number')]
+    )
     cartera = models.ForeignKey(Cartera, on_delete=models.CASCADE)
     categoria_producto = models.ForeignKey(CategoriaProducto, on_delete=models.CASCADE)
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
@@ -29,7 +36,9 @@ class Consumibles(models.Model):
     valor_unitario = models.DecimalField(max_digits=10, decimal_places=2)
     flete = models.DecimalField(max_digits=10, decimal_places=2)
     iva = models.ForeignKey(IVA, on_delete=models.CASCADE)
-    observaciones = models.TextField()
+    observaciones = models.TextField(
+        validators=[MaxLengthValidator(500, message='Las observaciones no pueden exceder los 500 caracteres')]
+    )
     fotos = models.ImageField(upload_to='consumibles/', null=True, blank=True)
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE)
     numero_convenio = models.CharField(max_length=50)
