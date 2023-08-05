@@ -38,7 +38,7 @@ class ActivosFijos(models.Model):
         validators=[MaxValueValidator(100, message='La vida útil no puede ser mayor a 100 años')]
     )
     moneda = models.ForeignKey(Moneda, on_delete=models.CASCADE)
-    valor_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_unitario = models.DecimalField(max_digits=20, decimal_places=10)
     flete = models.DecimalField(max_digits=10, decimal_places=2)
     iva = models.ForeignKey(IVA, on_delete=models.CASCADE)
     placa_amva = models.BigIntegerField(
@@ -55,3 +55,6 @@ class ActivosFijos(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.numero_factura)
