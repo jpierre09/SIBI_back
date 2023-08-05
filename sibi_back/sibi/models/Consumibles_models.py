@@ -9,7 +9,7 @@ from .Referencia_models import Referencia
 from .Ubicacion_models import Ubicacion
 from .CategoriaProducto_models import CategoriaProducto
 
-from django.core.validators import RegexValidator, MaxValueValidator, MaxLengthValidator
+from django.core.validators import RegexValidator, MaxValueValidator, MaxLengthValidator, MinValueValidator
 
 
 
@@ -18,15 +18,17 @@ class Consumibles(models.Model):
     cantidad = models.PositiveIntegerField()
     fecha_ingreso = models.DateField()
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    numero_factura = models.CharField(
-        max_length=50,
-        validators=[RegexValidator(regex='^\d+$', message='El número de factura debe ser un número entero', code='invalid_number')]
-    )
+    numero_factura = models.BigIntegerField(
+    validators=[
+        MinValueValidator(0), # Asegura que sea un número positivo
+        MaxValueValidator(10**50 - 1) # Asegura que no tenga más de 50 dígitos
+    ])
     fecha_factura = models.DateField()
-    numero_contrato = models.CharField(
-        max_length=50,
-        validators=[RegexValidator(regex='^\d+$', message='El número de contrato debe ser un número entero', code='invalid_number')]
-    )
+    numero_contrato = models.BigIntegerField(
+    validators=[
+        MinValueValidator(0), # Asegura que sea un número positivo
+        MaxValueValidator(10**50 - 1) # Asegura que no tenga más de 50 dígitos
+    ])
     cartera = models.ForeignKey(Cartera, on_delete=models.CASCADE)
     categoria_producto = models.ForeignKey(CategoriaProducto, on_delete=models.CASCADE)
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
