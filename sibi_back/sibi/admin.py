@@ -39,6 +39,10 @@ class MyAdminSite(AdminSite):
     site_title = 'Sistema Integral de Bienes y Servicios'
     site_header = 'Administrador de SIBI'
     index_title = 'Que ponemos en este lado????'
+    def each_context(self, request):
+        context = super().each_context(request)
+        context['site_url'] = 'https://geoportal.siata.gov.co/geoportal/'  # jajaja se puede mandar ver sitio a cualquier lado 
+        return context
 
 admin_site = MyAdminSite(name='SIBI')
 
