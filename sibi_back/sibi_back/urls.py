@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from sibi.admin import admin_site
 
 urlpatterns = [
+    path('SIBIAdmin/', admin_site.urls),
     path('admin/', admin.site.urls),
     path('SIBI/', include('sibi.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 
