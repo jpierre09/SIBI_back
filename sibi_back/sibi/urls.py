@@ -1,4 +1,6 @@
 from django.urls import path
+
+from .views.CombinarActivosConsumiblesViews import ActivosFijosConsumiblesListView
 from .views.ActivosFijosViews import ActivosFijosList, ActivosFijosDetail
 from .views.ArticuloViews import ArticuloList, ArticuloDetail
 from .views.CarteraViews import CarteraList, CarteraDetail
@@ -49,5 +51,8 @@ urlpatterns = [
     # ------- 
     path('ubicacion/', UbicacionList.as_view(), name='Ubicacion-list'),
     path('ubicacion/<int:pk>/', UbicacionDetail.as_view(), name='Ubicacion-detail'),
+    
+    #----------
+    path('listaTotal/', ActivosFijosConsumiblesListView.as_view(), name='Lista_total_activos_fijos_consumibles'),
     
 ]
