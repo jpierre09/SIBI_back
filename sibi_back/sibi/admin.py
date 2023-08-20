@@ -47,6 +47,7 @@ class MyAdminSite(AdminSite):
 admin_site = MyAdminSite(name='SIBI')
 
 
+
 #admin por defecto
 # admin.site.register(ActivosFijos)
 # admin.site.register(Articulo)
