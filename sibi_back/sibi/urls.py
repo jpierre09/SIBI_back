@@ -13,6 +13,7 @@ from .views.MonedaViews import MonedaList, MonedaDetail
 from .views.ProveedorViews import ProveedorList, ProveedorDetail
 from .views.ReferenciaViews import ReferenciaList, ReferenciaDetail
 from .views.UbicacionViews import UbicacionList, UbicacionDetail
+from .views.PorcentajeDeConsumibles import PorcentajeConsumiblesPorArticuloAPI
 
 urlpatterns = [
     # ------- 
@@ -54,5 +55,7 @@ urlpatterns = [
     
     #----------
     path('listaTotal/', ActivosFijosConsumiblesListView.as_view(), name='Lista_total_activos_fijos_consumibles'),
+    path('PorcentajeConsumibleArticulos/', PorcentajeConsumiblesPorArticuloAPI.as_view(), name='porcentaje_consumibles_por_articulo'),
+
     
 ]
