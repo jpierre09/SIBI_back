@@ -40,4 +40,4 @@ class Consumibles(models.Model):
     tipo_activo = models.CharField(max_length=20, default='consumible')
 
     def __str__(self):
-        return str(self.numero_factura)
+        return str(self.articulo)
