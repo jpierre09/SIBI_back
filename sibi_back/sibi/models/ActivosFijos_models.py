@@ -8,6 +8,7 @@ from .Moneda_models import Moneda
 from .Proveedor_models import Proveedor
 from .Referencia_models import Referencia
 from .Ubicacion_models import Ubicacion
+from .EstadoActivosFijos_models import EstadoActivosFijos
 
 # Validacion de errores
 from .validation_utils import positive_integer_with_max_digits, validate_observaciones
@@ -17,7 +18,7 @@ from django.core.validators import  MaxValueValidator, MaxLengthValidator
 
 
 class ActivosFijos(models.Model):
-    cantidad = models.PositiveIntegerField()
+    # cantidad = models.PositiveIntegerField()
     fecha_ingreso = models.DateField()
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     numero_factura = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
@@ -44,7 +45,9 @@ class ActivosFijos(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
-    tipo_activo = models.CharField(max_length=20, default='activo_fijo')
+    tipo_activo = models.CharField(max_length=20, default='activo_fijo',editable=False)
+    # estado_hisorial = models.ForeignKey(EstadoActivosFijos, on_delete=models.CASCADE,default=1)
 
     def __str__(self):
         return str(self.articulo)
+    
