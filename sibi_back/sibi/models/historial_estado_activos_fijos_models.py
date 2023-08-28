@@ -6,14 +6,15 @@ from .ActivosFijos_models import ActivosFijos
 # Validacion de errores
 from .validation_utils import positive_integer_with_max_digits, validate_observaciones
 
-class HistorialActivosFijos(models.Model):
+class HistoricoActivosFijos(models.Model):
     fecha = models.DateField()
     hora = models.TimeField()
     dependencia = models.ForeignKey(Dependencia, on_delete=models.CASCADE)
     red_monitoreo = models.ForeignKey(RedMonitoreo, on_delete=models.CASCADE)
     codigo_estacion = models.CharField(max_length=20)
     convenio = models.CharField(max_length=50)
-    placa_amva = models.CharField(max_length=20)
+    
+    # placa_amva = models.CharField(max_length=20)
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)
     barrio = models.CharField(max_length=100)
     cuenca = models.CharField(max_length=100)

@@ -15,7 +15,7 @@ from .models.Consumibles_models  import Consumibles
 from .models.Departamento_models import Departamento
 from .models.Dependencia_models import Dependencia
 from .models.EstadoActivosFijos_models import EstadoActivosFijos
-from .models.historial_estado_activos_fijos import HistorialActivosFijos
+from .models.historial_estado_activos_fijos_models import HistoricoActivosFijos
 from .models.Municipio_models import Municipio
 from .models.RedMonitoreo_models import RedMonitoreo
 from django.contrib.auth.models import Group, Permission
@@ -86,7 +86,7 @@ admin_site.register(Consumibles)
 admin_site.register(Departamento)
 admin_site.register(Dependencia)
 admin_site.register(EstadoActivosFijos)
-admin_site.register(HistorialActivosFijos)
+admin_site.register(HistoricoActivosFijos)
 admin_site.register(Municipio)
 admin_site.register(RedMonitoreo)
 

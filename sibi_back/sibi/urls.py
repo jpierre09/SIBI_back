@@ -13,8 +13,11 @@ from .views.MonedaViews import MonedaList, MonedaDetail
 from .views.ProveedorViews import ProveedorList, ProveedorDetail
 from .views.ReferenciaViews import ReferenciaList, ReferenciaDetail
 from .views.UbicacionViews import UbicacionList, UbicacionDetail
+
 from .views.PorcentajeDeConsumibles import PorcentajeConsumiblesPorArticuloAPI
 from .views.PorcentajeCategoriaConsumible import PorcentajeConsumiblesPorCategoriaAPI
+
+from .views.HistorialEstadoActivosFijosviews import CreateHistorial, GetUpdateDeleteHistorial, ListHistoriales
 
 urlpatterns = [
     # ------- 
@@ -23,10 +26,7 @@ urlpatterns = [
     # ------- 
     path('articulos/', ArticuloList.as_view(), name='Articulo-list'),
     path('articulos/<int:pk>/', ArticuloDetail.as_view(), name='Articulo-detail'),
-    # ------- 
-    path('cartera/', CarteraList.as_view(), name='Cartera-list'),
-    path('cartera/<int:pk>/', CarteraDetail.as_view(), name='Cartera-detail'),
-    # ------- 
+    # ------- CreateHistorial
     path('categoriaproductos/', CategoriaProductoList.as_view(), name='CategoriaProducto-list'),
     path('categoriaproductos/<int:pk>/', CategoriaProductoDetail.as_view(), name='CategoriaProducto-detail'),
     # ------- 
@@ -58,6 +58,12 @@ urlpatterns = [
     path('listaTotal/', ActivosFijosConsumiblesListView.as_view(), name='Lista_total_activos_fijos_consumibles'),
     path('PorcentajeConsumibleArticulos/', PorcentajeConsumiblesPorArticuloAPI.as_view(), name='porcentaje_consumibles_por_articulo'),
     path('PorcentajeConsumiblesPorCategoria/', PorcentajeConsumiblesPorCategoriaAPI.as_view(), name='Porcentaje_Consumibles_Categoria'),
+
+# Historiales contro de activos fijos
+
+    path('historiales/', ListHistoriales.as_view(), name='historial-list'),
+    path('historiales/create/', CreateHistorial.as_view(), name='historial-create'),
+    path('historiales/<int:historial_id>/', GetUpdateDeleteHistorial.as_view(), name='historial-detail'),
 
     
 ]
