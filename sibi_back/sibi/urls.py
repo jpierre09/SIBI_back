@@ -29,6 +29,10 @@ urlpatterns = [
     # ------- CreateHistorial
     path('categoriaproductos/', CategoriaProductoList.as_view(), name='CategoriaProducto-list'),
     path('categoriaproductos/<int:pk>/', CategoriaProductoDetail.as_view(), name='CategoriaProducto-detail'),
+    
+    # ------- Cartera
+    path('cartera/', CarteraList.as_view(), name='Cartera-list'),
+    path('cartera/<int:pk>/', CarteraDetail.as_view(), name='Cartera-detail'),
     # ------- 
     path('consumible/', ConsumiblesList.as_view(), name='Consumibles-list'),
     path('consumible/<int:pk>/', ConsumiblesDetail.as_view(), name='Consumibles-detail'),
