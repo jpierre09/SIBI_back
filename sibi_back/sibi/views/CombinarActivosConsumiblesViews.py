@@ -17,6 +17,16 @@ class ActivosFijosConsumiblesListView(APIView):
 
         combined_data = activos_serialized + consumibles_serialized
 
-        return Response(combined_data)
+        # return Response(combined_data)
+        
+        # machetazo de ids
+        combined_data_with_fake_ids = []
+        fake_id = 1
+        for item in combined_data:
+            item['fake_id'] = fake_id
+            fake_id += 1
+            combined_data_with_fake_ids.append(item)
+
+        return Response(combined_data_with_fake_ids)
 
 
