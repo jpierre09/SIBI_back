@@ -17,7 +17,7 @@ from .views.UbicacionViews import UbicacionList, UbicacionDetail
 from .views.PorcentajeDeConsumibles import PorcentajeConsumiblesPorArticuloAPI
 from .views.PorcentajeCategoriaConsumible import PorcentajeConsumiblesPorCategoriaAPI
 
-from .views.HistorialEstadoActivosFijosviews import CreateHistorial, GetUpdateDeleteHistorial, ListHistoriales
+from .views.HistorialEstadoActivosFijosviews import CreateHistorial, GetUpdateDeleteHistorial, ListHistoriales, ListHistoricosPorActivo
 
 urlpatterns = [
     # ------- 
@@ -64,6 +64,7 @@ urlpatterns = [
     path('historiales/', ListHistoriales.as_view(), name='historial-list'),
     path('historiales/create/', CreateHistorial.as_view(), name='historial-create'),
     path('historiales/<int:historial_id>/', GetUpdateDeleteHistorial.as_view(), name='historial-detail'),
+    path('historicos_por_activo/<int:activo_id>/', ListHistoricosPorActivo.as_view(), name='historicos-por-activo'),
 
     
 ]

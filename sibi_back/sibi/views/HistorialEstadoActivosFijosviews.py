@@ -37,3 +37,9 @@ class ListHistoriales(APIView):
         historiales = HistoricoActivosFijos.objects.all()
         serializer = HistorialActivosFijos(historiales, many=True)
         return Response(serializer.data)
+    
+class ListHistoricosPorActivo(APIView):
+    def get(self, request, activo_id, format=None):
+        historicos = HistoricoActivosFijos.objects.filter(activo_relacionado=activo_id)
+        serializer = HistorialActivosFijos(historicos, many=True)
+        return Response(serializer.data)
