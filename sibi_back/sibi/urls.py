@@ -19,7 +19,7 @@ from .views.PorcentajeCategoriaConsumible import PorcentajeConsumiblesPorCategor
 
 from .views.HistorialEstadoActivosFijosviews import CreateHistorial, GetUpdateDeleteHistorial, ListHistoriales, ListHistoricosPorActivo
 
-from .views.ReportecsvViews import download_csv
+from .views.ReportecsvIngresoViews import download_csv
 
 urlpatterns = [
     # ------- 
