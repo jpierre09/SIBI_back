@@ -46,7 +46,7 @@ class ActivosFijos(models.Model):
     updated = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
     tipo_activo = models.CharField(max_length=20, default='activo_fijo',editable=False)
-    # estado_hisorial = models.ForeignKey(EstadoActivosFijos, on_delete=models.CASCADE,default=1)
+    estado_hisorial = models.ForeignKey(EstadoActivosFijos, on_delete=models.CASCADE,default=1)
 
     def __str__(self):
         return str(self.articulo)
