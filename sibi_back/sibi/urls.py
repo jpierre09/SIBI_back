@@ -71,7 +71,9 @@ urlpatterns = [
     path('historiales/', ListHistoriales.as_view(), name='historial-list'),
     path('historiales/create/', CreateHistorial.as_view(), name='historial-create'),
     path('historiales/<int:historial_id>/', GetUpdateDeleteHistorial.as_view(), name='historial-detail'),
-    path('historicos_por_activo/<int:activo_id>/', ListHistoricosPorActivo.as_view(), name='historicos-por-activo'),
+    # path('historicos_por_activo/<int:activo_id>/', ListHistoricosPorActivo.as_view(), name='historicos-por-activo'),
+    path('historicos_por_activo/<str:activo_param>/', ListHistoricosPorActivo.as_view(), name='historicos-por-activo'),
+    
 
     # Descarga reporte en csv
     path('downloadcsv_report/', download_csv, name='downloadcsv_repor'),
