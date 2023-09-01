@@ -4,6 +4,8 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from ..models.historial_estado_activos_fijos_models import HistoricoActivosFijos
 from ..serializaers.HistorialEstadoAvticosFijosSerializer import HistorialActivosFijos
+from django.db.models import Q
+
 
 class CreateHistorial(APIView):
     def post(self, request, format=None):
@@ -39,7 +41,19 @@ class ListHistoriales(APIView):
         return Response(serializer.data)
     
 class ListHistoricosPorActivo(APIView):
-    def get(self, request, activo_id, format=None):
-        historicos = HistoricoActivosFijos.objects.filter(activo_relacionado=activo_id)
+    def get(self, request, activo_param, format=None):
+        
+        if activo_param.isnumeric():
+            l
+            historicos = HistoricoActivosFijos.objects.filter(
+                Q(activo_relacionado_id=activo_param) |
+                Q(activo_relacionado__serial=activo_param)
+            )
+        else:
+            
+            historicos = HistoricoActivosFijos.objects.filter(
+                activo_relacionado__codigo_amva=activo_param
+            )
+
         serializer = HistorialActivosFijos(historicos, many=True)
         return Response(serializer.data)
