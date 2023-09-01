@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views.CombinarActivosConsumiblesViews import ActivosFijosConsumiblesListView
-from .views.ActivosFijosViews import ActivosFijosList, ActivosFijosDetail
+from .views.ActivosFijosViews import ActivosFijosList, ActivosFijosDetail, ActivosFijosEgresadpsList
 from .views.ArticuloViews import ArticuloList, ArticuloDetail
 from .views.CarteraViews import CarteraList, CarteraDetail
 from .views.CategoriaProductoViews import CategoriaProductoList, CategoriaProductoDetail
@@ -23,7 +23,8 @@ from .views.ReportecsvIngresoViews import download_csv
 
 urlpatterns = [
     # ------- 
-    path('ActivosFijos/', ActivosFijosList.as_view(), name='activosfijos-list'),
+    path('ActivosFijos/', ActivosFijosList.as_view(), name='activosfijos-ingresados'),
+    path('ActivosFijos/egresados/', ActivosFijosEgresadpsList.as_view(), name='activosfijos-egresados'),
     path('ActivosFijos/<int:pk>/', ActivosFijosDetail.as_view(), name='activosfijos-detail'),
     # ------- 
     path('articulos/', ArticuloList.as_view(), name='Articulo-list'),

@@ -7,7 +7,7 @@ from ..serializaers.ActivosFijosSerializer import ActivosFijosSerializer
 
 class ActivosFijosList(APIView):
     def get(self, request):
-        activos = ActivosFijos.objects.all()
+        activos = ActivosFijos.objects.filter(estado_hisorial_id=1)
         serializer = ActivosFijosSerializer(activos, many=True)
         return Response(serializer.data)
 
@@ -17,6 +17,12 @@ class ActivosFijosList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class ActivosFijosEgresadpsList(APIView):
+    def get(self, request):
+        activos = ActivosFijos.objects.filter(estado_hisorial_id=2)
+        serializer = ActivosFijosSerializer(activos, many=True)
+        return Response(serializer.data)
 
 class ActivosFijosDetail(APIView):
     def get_object(self, pk):
