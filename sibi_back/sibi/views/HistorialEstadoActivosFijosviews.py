@@ -44,13 +44,12 @@ class ListHistoricosPorActivo(APIView):
     def get(self, request, activo_param, format=None):
         
         if activo_param.isnumeric():
-            l
+            
             historicos = HistoricoActivosFijos.objects.filter(
                 Q(activo_relacionado_id=activo_param) |
                 Q(activo_relacionado__serial=activo_param)
             )
         else:
-            
             historicos = HistoricoActivosFijos.objects.filter(
                 activo_relacionado__codigo_amva=activo_param
             )
