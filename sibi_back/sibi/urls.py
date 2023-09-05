@@ -20,6 +20,7 @@ from .views.PorcentajeCategoriaConsumible import PorcentajeConsumiblesPorCategor
 from .views.HistorialEstadoActivosFijosviews import CreateHistorial, GetUpdateDeleteHistorial, ListHistoriales, ListHistoricosPorActivo
 
 from .views.ReportecsvIngresoViews import download_csv
+from .views.ReportecsvEgresoViews import download_csv_egresos
 
 urlpatterns = [
     # ------- 
@@ -75,8 +76,9 @@ urlpatterns = [
     path('historicos_por_activo/<str:activo_param>/', ListHistoricosPorActivo.as_view(), name='historicos-por-activo'),
     
 
-    # Descarga reporte en csv
+    # Descarga reporte en csv ingresos(1) y egresos(2)
     path('downloadcsv_report/', download_csv, name='downloadcsv_repor'),
+    path('downloadcsv_report_egresos/', download_csv_egresos, name='downloadcsv_repor_egresos'),
 
     
 ]
