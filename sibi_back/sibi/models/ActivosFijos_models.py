@@ -9,6 +9,8 @@ from .Proveedor_models import Proveedor
 from .Referencia_models import Referencia
 from .Ubicacion_models import Ubicacion
 from .EstadoActivosFijos_models import EstadoActivosFijos
+from .FacturaContrato_models import FacturaContrato
+
 
 # Validacion de errores
 from .validation_utils import positive_integer_with_max_digits, validate_observaciones
@@ -17,13 +19,18 @@ from .validation_utils import positive_integer_with_max_digits, validate_observa
 from django.core.validators import  MaxValueValidator, MaxLengthValidator
 
 
+
+
 class ActivosFijos(models.Model):
     # cantidad = models.PositiveIntegerField()
     fecha_ingreso = models.DateField()
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    numero_factura = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
+    
+    factura_contrato = models.ForeignKey(FacturaContrato, on_delete=models.CASCADE)
+
+    # numero_factura = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
     fecha_ingreso = models.DateField()
-    numero_contrato = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
+    # numero_contrato = models.BigIntegerField(validators=positive_integer_with_max_digits(50))
     cartera = models.ForeignKey(Cartera, on_delete=models.CASCADE)
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)

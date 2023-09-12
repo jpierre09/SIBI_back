@@ -20,6 +20,7 @@ from .models.Municipio_models import Municipio
 from .models.RedMonitoreo_models import RedMonitoreo
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.models import User
+from .models.FacturaContrato_models import FacturaContrato
 from django.contrib.admin import AdminSite
 from django.contrib.auth.admin import GroupAdmin
 
@@ -89,6 +90,7 @@ admin_site.register(EstadoActivosFijos)
 admin_site.register(HistoricoActivosFijos)
 admin_site.register(Municipio)
 admin_site.register(RedMonitoreo)
+admin_site.register(FacturaContrato)
 
 
 admin_site.register(Group,CustomGroupAdmin)
