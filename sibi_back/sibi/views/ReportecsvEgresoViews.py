@@ -6,11 +6,11 @@ from django.db.models import Q
 
 
 '''
-Ejemplo de la URL :GET http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=2023-08-20&fecha_fin=2023-08-20
+Ejemplo de la URL :GET http://127.0.0.1:8000/SIBI/downloadcsv_report_egresos/?fecha_inicio=2023-08-20&fecha_fin=2023-08-20
 
 '''
 
-def download_csv(request):
+def download_csv_egresos(request):
     # Recibir las fechas desde la URL
     fecha_inicio_str = request.GET.get('fecha_inicio', None)
     fecha_fin_str = request.GET.get('fecha_fin', None)
@@ -24,13 +24,13 @@ def download_csv(request):
     fecha_fin = datetime.strptime(fecha_fin_str, '%Y-%m-%d').date()
 
     # Filtrar la consulta por el rango de fechas y el estado historial es el 1 (ingreso)
-    ingresos = ActivosFijos.objects.filter(Q(estado_hisorial_id=1) & Q(fecha_ingreso__range=(fecha_inicio, fecha_fin)))
+    egresos = ActivosFijos.objects.filter(Q(estado_hisorial_id=2) & Q(fecha_ingreso__range=(fecha_inicio, fecha_fin)))
     # print(ingresos)
 
     # ingresos = ActivosFijos.objects.filter(fecha_ingreso__range=(fecha_inicio, fecha_fin))
 
     # Si no hay resultados, devolver un mensaje de error
-    if not ingresos.exists():
+    if not egresos.exists():
         return JsonResponse({'error': 'No hay datos disponibles para el rango de fechas proporcionado'}, status=404)
 
     response = HttpResponse(content_type='text/csv')
@@ -39,7 +39,7 @@ def download_csv(request):
     writer = csv.writer(response)
     writer.writerow(['fecha_ingreso', 'proveedor','numero_factura', 'numero_contrato', 'cartera','articulo', 'marca', 'referencia', 'modelo', 'serial', 'vida_util', 'valor_unitario', 'flete', 'placa_amva', 'observaciones', 'created', 'updated'])  # Encabezados del CSV
     
-    for ingreso in ingresos:
-        writer.writerow([ingreso.fecha_ingreso, ingreso.proveedor, ingreso.numero_factura, ingreso.numero_contrato, ingreso.cartera, ingreso.articulo, ingreso.marca, ingreso.referencia, ingreso.modelo, ingreso.serial, ingreso.vida_util, ingreso.valor_unitario, ingreso.flete, ingreso.placa_amva, ingreso.observaciones, ingreso.created, ingreso.updated])
+    for egreso in egresos:
+        writer.writerow([egreso.fecha_ingreso, egreso.proveedor, egreso.numero_factura, egreso.numero_contrato, egreso.cartera, egreso.articulo, egreso.marca, egreso.referencia, egreso.modelo, egreso.serial, egreso.vida_util, egreso.valor_unitario, egreso.flete, egreso.placa_amva, egreso.observaciones, egreso.created, egreso.updated])
 
     return response
